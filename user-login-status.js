@@ -28,5 +28,5 @@ jQuery(document).ready(function($) {
             let userId = $(this).attr('id').replace('user-status-', '');
             checkUserStatus(userId);
         });
-    }, 5000);
+    }, 30000);
 });
