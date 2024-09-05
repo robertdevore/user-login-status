@@ -50,10 +50,10 @@ Once the plugin is activated:
 ## Screenshots
 
 1. **User status column**: Shows a green circle for logged-in users and a red circle for logged-out users.
-   ![User status column](screenshot-1.png)
+   ![User status column](screenshot-1.jpg)
    
 2. **Bulk log out action**: Select multiple users and log them out from the Users table.
-   ![Bulk log out action](screenshot-2.png)
+   ![Bulk log out action](screenshot-2.jpg)
 
 ## Frequently Asked Questions
 
