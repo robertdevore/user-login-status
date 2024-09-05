@@ -1,18 +1,10 @@
-# User Status Check
-
-**Contributors:** [robertdevore]  
-**Tags:** user status, admin, login status, bulk logout  
-**Requires at least:** 5.0  
-**Tested up to:** 6.0  
-**Stable tag:** 1.0.0  
-**License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
+# User Login Status
 
 A WordPress plugin to easily view which users are online/offline and log them out en-masse directly from the Users admin table.
 
 ## Description
 
-The **User Status Check** plugin enables administrators to view and manage user login statuses directly from the WordPress admin dashboard. With this plugin, you can easily see which users are logged in or out and, if necessary, log out multiple users at once using the bulk action feature.
+The **User Login Status** plugin enables administrators to view and manage user login statuses directly from the WordPress admin dashboard. With this plugin, you can easily see which users are logged in or out and, if necessary, log out multiple users at once using the bulk action feature.
 
 ### Key Features
 - 🟢 **Monitor Login Status**: Quickly see whether a user is logged in or out via color-coded icons (green = online, red = offline) in the Users table.
@@ -24,7 +16,7 @@ The **User Status Check** plugin enables administrators to view and manage user 
 
 ### From Your WordPress Dashboard
 1. Navigate to **Plugins > Add New**.
-2. Search for **User Status Check**.
+2. Search for **User Login Status**.
 3. Click **Install Now** and then **Activate**.
 
 ### Manual Installation
@@ -34,7 +26,7 @@ The **User Status Check** plugin enables administrators to view and manage user 
 
 ### Installation via FTP
 1. Download the plugin ZIP file and unzip it.
-2. Upload the `user-status-check` folder to the `/wp-content/plugins/` directory on your server.
+2. Upload the `user-login-status` folder to the `/wp-content/plugins/` directory on your server.
 3. Activate the plugin from the **Plugins** menu in WordPress.
 
 ## Usage
@@ -78,11 +70,7 @@ For websites with large numbers of users, the plugin batches AJAX requests to im
 
 ### 1.0.0
 - Initial release.
-- Added user status column in the Users table.
-- Added bulk log out functionality.
-- Real-time status updates via AJAX every 30 seconds.
-- Security added with nonce verification for AJAX requests.
 
 ## License
 
-This plugin is licensed under the GPLv2 or later. For more information, visit [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html).
+This plugin is licensed under the GPLv3 or later. For more information, visit [http://www.gnu.org/licenses/gpl-3.0.html](http://www.gnu.org/licenses/gpl-3.0.html).
