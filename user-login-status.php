@@ -105,17 +105,23 @@ function check_user_status_ajax_handler() {
         wp_send_json_error( 'Unauthorized', 403 );
     }
 
-    $user_id = intval( $_POST['user_id'] );
+    $user_ids = isset( $_POST['user_ids'] ) ? array_map( 'intval', $_POST['user_ids'] ) : [];
 
-    if ( ! $user_id ) {
-        wp_send_json_error( 'Invalid user ID', 400 );
+    if ( empty( $user_ids ) ) {
+        wp_send_json_error( 'No user IDs provided', 400 );
     }
 
-    // Check the session tokens for the user.
-    $session_tokens = get_user_meta( $user_id, 'session_tokens', true );
+    // Initialize an empty array to hold statuses.
+    $statuses = [];
 
-    // Return JSON response indicating whether the user is logged in or not.
-    wp_send_json_success( array( 'is_logged_in' => ! empty( $session_tokens ) ) );
+    // Loop through each user and get their login status.
+    foreach ( $user_ids as $user_id ) {
+        $session_tokens     = get_user_meta( $user_id, 'session_tokens', true );
+        $statuses[$user_id] = ! empty( $session_tokens ) ? 'online' : 'offline';
+    }
+
+    // Return the statuses for all requested users
+    wp_send_json_success( $statuses );
 }
 add_action( 'wp_ajax_check_user_status', 'check_user_status_ajax_handler' );
 

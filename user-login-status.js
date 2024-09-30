@@ -1,32 +1,39 @@
 jQuery(document).ready(function($) {
-    // Function to check user status periodically via AJAX.
-    function checkUserStatus(userId) {
+    // Function to check user statuses periodically via a single AJAX call.
+    function checkAllUserStatuses() {
+        let userIds = [];
+
+        // Collect all user IDs
+        $('.user-status-circle').each(function() {
+            let userId = $(this).attr('id').replace('user-status-', '');
+            userIds.push(userId);
+        });
+
+        // Make a single AJAX request with all user IDs
         $.ajax({
             url: ajax_object.ajax_url,
             method: 'POST',
             data: {
                 action: 'check_user_status',
-                user_id: userId,
+                user_ids: userIds,  // Send the array of user IDs
                 nonce: ajax_object.nonce // Include nonce in the request
             },
             success: function(response) {
                 if (response.success) {
-                    // Update the user's status circle based on the response.
-                    if (response.data.is_logged_in) {
-                        $('span#user-status-' + userId).removeClass('user-status-offline').addClass('user-status-online');
-                    } else {
-                        $('span#user-status-' + userId).removeClass('user-status-online').addClass('user-status-offline');
-                    }
+                    // Loop through the response and update each user's status
+                    $.each(response.data, function(userId, status) {
+                        let userStatusElement = $('span#user-status-' + userId);
+                        if (status === 'online') {
+                            userStatusElement.removeClass('user-status-offline').addClass('user-status-online');
+                        } else {
+                            userStatusElement.removeClass('user-status-online').addClass('user-status-offline');
+                        }
+                    });
                 }
             }
         });
     }
 
-    // Polling every 5 seconds to check the status.
-    setInterval(function() {
-        $('.user-status-circle').each(function() {
-            let userId = $(this).attr('id').replace('user-status-', '');
-            checkUserStatus(userId);
-        });
-    }, 30000);
+    // Poll every 30 seconds to check all user statuses in a single call
+    setInterval(checkAllUserStatuses, 30000);
 });
