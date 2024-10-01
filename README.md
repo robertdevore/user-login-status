@@ -68,8 +68,13 @@ For websites with large numbers of users, the plugin batches AJAX requests to im
 
 ## Changelog
 
+### 1.0.1
+-   Updated the ajax calls to include all users in a single call for peformance improvements in `user-login-status.php`
+-   Updated the JS for ajax calls to include all users in a single call for performance improvements in `user-login-status.js`
+-   Updated status check to also look for unexpired `session_tokens` in `user-login-status.php`
+
 ### 1.0.0
-- Initial release.
+-   Initial release.
 
 ## License
 
