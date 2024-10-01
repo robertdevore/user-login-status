@@ -3,24 +3,24 @@ jQuery(document).ready(function($) {
     function checkAllUserStatuses() {
         let userIds = [];
 
-        // Collect all user IDs
+        // Collect all user IDs.
         $('.user-status-circle').each(function() {
             let userId = $(this).attr('id').replace('user-status-', '');
             userIds.push(userId);
         });
 
-        // Make a single AJAX request with all user IDs
+        // Make a single AJAX request with all user IDs.
         $.ajax({
             url: ajax_object.ajax_url,
             method: 'POST',
             data: {
                 action: 'check_user_status',
-                user_ids: userIds,  // Send the array of user IDs
-                nonce: ajax_object.nonce // Include nonce in the request
+                user_ids: userIds,
+                nonce: ajax_object.nonce
             },
             success: function(response) {
                 if (response.success) {
-                    // Loop through the response and update each user's status
+                    // Loop through the response and update each user's status.
                     $.each(response.data, function(userId, status) {
                         let userStatusElement = $('span#user-status-' + userId);
                         if (status === 'online') {
@@ -34,6 +34,6 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // Poll every 30 seconds to check all user statuses in a single call
+    // Poll every 30 seconds to check all user statuses in a single call.
     setInterval(checkAllUserStatuses, 30000);
 });

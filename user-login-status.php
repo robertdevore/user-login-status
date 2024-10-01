@@ -95,6 +95,11 @@ add_action( 'admin_enqueue_scripts', 'enqueue_user_status_styles' );
  *
  * @return void
  */
+/**
+ * AJAX Handler to check user status via a REST endpoint.
+ *
+ * @return void
+ */
 function check_user_status_ajax_handler() {
     // Verify nonce
     if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'user_status_nonce' ) ) {
@@ -111,16 +116,30 @@ function check_user_status_ajax_handler() {
         wp_send_json_error( 'No user IDs provided', 400 );
     }
 
-    // Initialize an empty array to hold statuses.
-    $statuses = [];
+    // Create variables.
+    $statuses     = [];
+    $current_time = time();
 
-    // Loop through each user and get their login status.
+    // Loop through each user and check the validity of session tokens.
     foreach ( $user_ids as $user_id ) {
-        $session_tokens     = get_user_meta( $user_id, 'session_tokens', true );
-        $statuses[$user_id] = ! empty( $session_tokens ) ? 'online' : 'offline';
-    }
+        $session_tokens = get_user_meta( $user_id, 'session_tokens', true );
 
-    // Return the statuses for all requested users
+        if ( is_array( $session_tokens ) ) {
+            // Filter tokens to find any valid (unexpired) session.
+            $has_valid_session = false;
+            foreach ( $session_tokens as $token_data ) {
+                if ( isset( $token_data['expiration'] ) && $token_data['expiration'] > $current_time ) {
+                    $has_valid_session = true;
+                    break;
+                }
+            }
+            // Set user status based on valid session presence.
+            $statuses[$user_id] = $has_valid_session ? 'online' : 'offline';
+        } else {
+            // No session tokens, user is offline.
+            $statuses[$user_id] = 'offline';
+        }
+    }
     wp_send_json_success( $statuses );
 }
 add_action( 'wp_ajax_check_user_status', 'check_user_status_ajax_handler' );
