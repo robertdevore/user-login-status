@@ -4,7 +4,7 @@ Donate link: https://robertdevore.com/
 Tags: user, login, login-status, user-control
 Requires at least: 4.7
 Tested up to: 6.6.2
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,10 @@ The **User Login Status** plugin enables administrators to view and manage user 
 - 🔒 **Secure AJAX Requests**: The plugin uses nonces to ensure that AJAX requests are secure and valid.
 
 == Changelog ==
+
+= 1.1.0 =
+*   Added `PluginUpdateChecker` to serve plugin updates directly from GitHub instead of wp.org in `user-login-status.php`
+*   Added `.pot` file for language translation in `languages/user-login-status.pot`
 
 = 1.0.1 =
 *   Updated the ajax calls to include all users in a single call for peformance improvements in `user-login-status.php`

@@ -12,7 +12,7 @@
  * Plugin Name: User Login Status
  * Description: A plugin to quickly see which users are online or offline, and log them out en masse.
  * Plugin URI:  https://robertdevore.com/
- * Version:     1.0.1
+ * Version:     1.1.0
  * Author:      Robert DeVore
  * Author URI:  https://robertdevore.com/
  * License:     GPL-2.0+
