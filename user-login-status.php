@@ -26,6 +26,18 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
+require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/robertdevore/user-login-status/',
+	__FILE__,
+	'user-login-status'
+);
+
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch( 'main' );
+
 /**
  * Add a new column in the Users admin table.
  *
